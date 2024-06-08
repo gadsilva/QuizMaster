@@ -4,14 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuizMaster</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <!-- Título da página -->
-    <h1>Bem-vindo ao QuizMaster!</h1>
-    <!-- Descrição e botão para começar o quiz -->
-    <p>Clique no botão abaixo para começar o quiz:</p>
-    <form action="/quiz" method="get">
-        <button type="submit">Começar Quiz</button>
-    </form>
+    <div class="header">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+        <h1>Bem-vindo ao QuizMaster!</h1>
+    </div>
+    <br>
+    <!-- Botão para começar o quiz -->
+    <button type="button" id="startQuizButton">Começar Quiz</button>
+
+    <!-- Lista de ícones para selecionar o tópico -->
+    <div id="topicIcons" style="display: none;">
+        <div class="header">
+            <h1>Sobre o que você quer jogar hoje?</h1>
+        </div>
+        <br>
+        <div class="topic-icon" onclick="startQuiz('Introdução à Programação')">
+            <img src="{{ url_for('static', filename='images/programacao.png') }}" alt="Ícone Introdução à Programação">
+            <p>Introdução à Programação</p>
+        </div>
+        <div class="topic-icon" onclick="startQuiz('Lógica de Programação')">
+            <img src="{{ url_for('static', filename='images/logica.png') }}" alt="Ícone Lógica de Programação">
+            <p>Lógica de Programação</p>
+        </div>
+        <!-- Adicione mais divs de ícones conforme necessário para outros tópicos -->
+    </div>
+
+    <!-- Lista de quizzes disponíveis -->
+    <div id="quizQuestions" class="animated-question" style="display: none;">
+        <h2 id="questionHeader">Quizzes Disponíveis:</h2>
+        <form id="quizForm" action="/quiz" method="post">
+            <ul id="questionsList">
+                <!-- As perguntas serão adicionadas aqui dinamicamente com JavaScript -->
+            </ul>
+            <button type="button" id="submitButton">Enviar Respostas</button>
+        </form>
+    </div>
+
+    <!-- Resultados do Quiz -->
+    <div id="quizResults" style="display: none;">
+        <h2>Resultados do Quiz:</h2>
+        <div id="score"></div>
+        <div id="correctAnswers"></div>
+        <div id="incorrectAnswers"></div>
+        <div id="incorrectQuestions"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
