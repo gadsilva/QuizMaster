@@ -17,6 +17,16 @@ class Quiz:
 
     def remove_question(self, question):
         self.questions.remove(question)
+    
+    def to_dict(self):
+        return {
+            'topic': self.topic,
+            'questions': [{
+                'text': question.text,
+                'options': question.options,
+                'correct_answer': question.correct_answer
+            } for question in self.questions]
+        }
 
 # Dicionário contendo os quizzes por tópico
 quizzes_by_topic = {
